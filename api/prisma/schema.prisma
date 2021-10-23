@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+//cria arquivo dev.db, onde fica parte do banco de dados
+datasource db {
+  provider = "sqlite"
+  url = "file:./dev.db" 
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+ 
+
+// table usuário
+// default(uuid()) faz o auto incremento
+// quando criar a table, vai ter o nome users
+// comando pra nomear @@map("users")
+
+// yarn prisma migrate dev
+// todos params estão como obrigatórios, se quisesse colocar como opcionais era so colocor ?
+//      ex: name       String?
+model User {
+  id         String @id @default(uuid())
+  name       String
+  github_id  Int
+  avatar_url String
+  login      String
+
+  @@map("users")
+  messages Message[]
+}
+
+
+// now -> pega a data do sistema
+model Message {
+  id      String @id @default(uuid())
+  text    String
+  created_at  DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id])
+  
+  @@map("messages")
+
+  user_id  String
+} 

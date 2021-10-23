@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "es2017",                                    
+    "module": "commonjs",                                
+    "esModuleInterop": true, 
+    "forceConsistentCasingInFileNames": true,
+    "strict": false, // cm utiliza ts, não precisa dele pra mostrar variaveis que não está utilizando, etc
+    "skipLibCheck": true,
+    "typeRoots": ["./src/@types", "node_modules/@types"]
+  }
+}
